@@ -27,22 +27,38 @@
   .callout { background:#fff8f7; border-left:4px solid var(--accent); padding:10px 14px; margin:14px 0; border-radius:0 6px 6px 0; }
   .num { font-weight:700; font-variant-numeric: tabular-nums; }
   a { color:#1a5fb4; }
-  ol.quiz { padding-left: 26px; }
-  ol.quiz li { margin: 8px 0; }
-  .answer { font-weight:700; margin-left:6px; }
-  .quiz-controls { margin: 10px 0; }
   button { font:inherit; padding:6px 12px; border:1px solid var(--line); background:#fff; border-radius:6px; cursor:pointer; margin-right:8px; }
   button:hover { background: var(--bg); }
-  body.hide-answers .answer { visibility: hidden; }
-  body.hide-answers li:hover .answer, body.hide-answers li.show .answer { visibility: visible; }
   .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; border:1px solid #0002; vertical-align:-1px; margin-right:6px; }
   @media print {
-    nav, .quiz-controls { display:none; }
-    body.hide-answers .answer { visibility: visible; }
+    nav { display:none; }
     h2 { break-after: avoid; }
     tr { break-inside: avoid; }
     a { color: inherit; text-decoration:none; }
   }
+  .scorebar { display:flex; flex-wrap:wrap; gap:18px; background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:10px 14px; font-size:15px; }
+  .progress { height:8px; background:#eceff3; border-radius:4px; margin:10px 0 14px; overflow:hidden; }
+  #q-progress { height:100%; width:0; background:var(--accent); transition:width .3s; }
+  .qcard { border:1px solid var(--line); border-radius:10px; padding:18px; }
+  .qtext { font-size:18px; font-weight:600; margin:0 0 14px; }
+  .options { display:grid; gap:10px; }
+  .options button { text-align:left; padding:12px 14px; margin:0; font-size:16px; border-radius:8px; }
+  .options button.correct { background:var(--high); border-color:#2e8b4a; color:#1e6b34; font-weight:600; }
+  .options button.wrong { background:var(--low); border-color:#c0392b; color:#8c1d18; }
+  .options button:disabled { cursor:default; opacity:1; }
+  .feedback { min-height:24px; font-weight:600; margin:14px 0 6px; }
+  .feedback.good { color:#1e6b34; } .feedback.bad { color:#8c1d18; }
+  .qnav button { margin-top:6px; }
+  #q-next { background:var(--accent); color:#fff; border-color:var(--accent); }
+  #q-next:disabled { background:#ccc; border-color:#ccc; cursor:default; }
+  button.secondary { background:#fff; color:var(--ink); }
+  .modal { position:fixed; inset:0; background:rgba(0,0,0,.55); display:flex; align-items:center; justify-content:center; padding:20px; z-index:10; }
+  .modal[hidden] { display:none; }
+  .modal-box { background:#fff; border-radius:12px; padding:28px; max-width:420px; width:100%; text-align:center; box-shadow:0 10px 40px rgba(0,0,0,.3); }
+  .modal-box h3 { font-size:26px; margin:0 0 8px; }
+  .modal-box.pass h3 { color:var(--accent); }
+  .modal-box p { font-size:17px; margin:0 0 18px; }
+  @media print { #quiz-app, .modal { display:none !important; } }
 </style>
 </head>
 <body>
@@ -68,9 +84,10 @@
 <div class="table-wrap"><table>
 <thead><tr><th>First two digits</th><th>Station area</th></tr></thead>
 <tbody>
-<tr><td class="num">60x</td><td>Glenside station (Glenside Fire Protection District)</td></tr>
+<tr><td class="num">60x</td><td>Station 61 (Glen Ellyn HQ, downtown)</td></tr>
 <tr><td class="num">61x</td><td>Station 61 (Glen Ellyn HQ, downtown)</td></tr>
 <tr><td class="num">62x</td><td>Station 62 (Glen Ellyn, south of Roosevelt Rd)</td></tr>
+<tr><td class="num">63x</td><td>Station 62 (none on the March 9, 2026 map)</td></tr>
 </tbody></table></div>
 
 <h3>Last digit: what is in the area</h3>
@@ -85,12 +102,11 @@
 <tr><td class="num">8</td><td>Multifamily</td><td>618, 628</td></tr>
 </tbody></table></div>
 
-<div class="callout"><strong>Putting it together:</strong> <span class="num">615</span> = Station 61's area, newer area near the train. <span class="num">626</span> = Station 62's area, target hazard. <span class="num">603</span> = Glenside station's area, hydrants.</div>
+<div class="callout"><strong>Putting it together:</strong> <span class="num">615</span> = Station 61's area, newer area near the train. <span class="num">626</span> = Station 62's area, target hazard. <span class="num">603</span> = Station 61's area, hydrants.</div>
 
 <p><strong>Still to confirm with your officer:</strong></p>
 <ul>
 <li>What "help with mutual aid ambulances" means for 5 districts. It was asked in the Jan 30, 2024 thread, but the screenshot shows no answer.</li>
-<li>Which Glenside station covers the 60x districts, and its address. (Glenside FPD headquarters is at 1608 Bloomingdale Rd, Glendale Heights.)</li>
 <li>Which buildings are in the 618 and 628 multifamily pockets.</li>
 </ul>
 
@@ -101,10 +117,10 @@
 <div class="table-wrap"><table>
 <thead><tr><th>District</th><th>Color on map</th><th>Where it is</th><th>Meaning</th></tr></thead>
 <tbody>
-<tr><td class="num">600</td><td><span class="swatch" style="background:#9cc8e8"></span>Light blue</td><td>Pockets in the north and northeast: one west near Bloomingdale Rd, one near North Ave by I-355, and the large block along St. Charles Rd west of I-355</td><td>Glenside area · no hydrants</td></tr>
-<tr><td class="num">603</td><td><span class="swatch" style="background:#e04a6e"></span>Red / pink</td><td>North end, from North Ave (Rt. 64) south to about Geneva Rd</td><td>Glenside area · hydrants</td></tr>
-<tr><td class="num">605</td><td><span class="swatch" style="background:#c9a0c0"></span>Mauve (small)</td><td>Small strip in the northwest of 603</td><td>Glenside area · newer area near train / mutual aid ambulance help</td></tr>
-<tr><td class="num">606</td><td><span class="swatch" style="background:#d8ecd5"></span>Pale green</td><td>One block in the northeast of 603, near Creekside</td><td>Glenside area · target hazard</td></tr>
+<tr><td class="num">600</td><td><span class="swatch" style="background:#9cc8e8"></span>Light blue</td><td>Pockets in the north and northeast: one west near Bloomingdale Rd, one near North Ave by I-355, and the large block along St. Charles Rd west of I-355</td><td>Station 61 area · no hydrants</td></tr>
+<tr><td class="num">603</td><td><span class="swatch" style="background:#e04a6e"></span>Red / pink</td><td>North end, from North Ave (Rt. 64) south to about Geneva Rd</td><td>Station 61 area · hydrants</td></tr>
+<tr><td class="num">605</td><td><span class="swatch" style="background:#c9a0c0"></span>Mauve (small)</td><td>Small strip in the northwest of 603</td><td>Station 61 area · newer area near train / mutual aid ambulance help</td></tr>
+<tr><td class="num">606</td><td><span class="swatch" style="background:#d8ecd5"></span>Pale green</td><td>One block in the northeast of 603, near Creekside</td><td>Station 61 area · target hazard</td></tr>
 <tr><td class="num">610</td><td><span class="swatch" style="background:#9cc8e8"></span>Light blue</td><td>East side by I-355, south of the tracks</td><td>Station 61 area · no hydrants</td></tr>
 <tr><td class="num">613</td><td><span class="swatch" style="background:#f4f0cf"></span>Cream / pale yellow</td><td>North-central: from about Geneva Rd south to the railroad</td><td>Station 61 area · hydrants</td></tr>
 <tr><td class="num">615</td><td><span class="swatch" style="background:#e9a66e"></span>Orange</td><td>Central: south of the railroad</td><td>Station 61 area · newer area near train / mutual aid ambulance help</td></tr>
@@ -126,7 +142,6 @@
 <tbody>
 <tr><td>Station 61 (Headquarters)</td><td><a href="https://wiki.radioreference.com/index.php/Dupage_County_(IL)_Fire/EMS">524 Pennsylvania Ave (at N. Main St)</a></td><td class="num">616</td><td><span class="conf Med">Med</span></td><td>Downtown. Some listings show 506 Pennsylvania Ave.</td></tr>
 <tr><td>Station 62</td><td><a href="https://wiki.radioreference.com/index.php/Dupage_County_(IL)_Fire/EMS">685 Taft Ave</a> (between Exmoor Ave and Kingsbrook Glen)</td><td class="num">623</td><td><span class="conf Low">Low</span></td><td>South of Roosevelt Rd (<a href="https://www.dailyherald.com/20251110/news/glen-ellyn-wants-input-on-potential-fire-station-renovations/">Daily Herald</a>). Some listings show 681 Taft Ave.</td></tr>
-<tr><td>Glenside FPD (covers 60x districts)</td><td>HQ: 1608 Bloomingdale Rd, Glendale Heights</td><td>—</td><td><span class="conf Low">Low</span></td><td>Confirm which Glenside station is first-due for 60x.</td></tr>
 </tbody></table></div>
 <p class="note">Public listings disagree on the house numbers for both Glen Ellyn stations, so confirm them with your officer.</p>
 
@@ -207,52 +222,168 @@
 <p class="note">Not included on purpose: preschools and daycares, College of DuPage, and neighboring departments' stations.</p>
 
 <h2 id="quiz">Practice quiz</h2>
-<p>Answers are hidden. Tap or hover a question to reveal its answer, or use the buttons. Printing shows all answers.</p>
-<div class="quiz-controls">
-  <button type="button" onclick="document.body.classList.remove('hide-answers')">Show all answers</button>
-  <button type="button" onclick="document.body.classList.add('hide-answers');document.querySelectorAll('ol.quiz li.show').forEach(function(li){li.classList.remove('show')})">Hide all answers</button>
+<p>25 multiple-choice questions. Pick an answer to see if you got it right. Score 18 or more (70%) to pass.</p>
+<div id="quiz-app">
+  <div class="scorebar">
+    <span>Question <strong id="q-num">1</strong> of <strong id="q-total">25</strong></span>
+    <span>Correct: <strong id="q-correct">0</strong></span>
+    <span>Answered: <strong id="q-answered">0</strong></span>
+  </div>
+  <div class="progress"><div id="q-progress"></div></div>
+  <div class="qcard">
+    <p id="q-text" class="qtext"></p>
+    <div id="q-options" class="options"></div>
+    <p id="q-feedback" class="feedback" aria-live="polite"></p>
+    <div class="qnav">
+      <button type="button" id="q-next" disabled>Next question</button>
+      <button type="button" id="q-restart" class="secondary">Restart quiz</button>
+    </div>
+  </div>
 </div>
-<ol class="quiz">
-<li>What do the first two digits of a district tell you? <span class="answer">The station area: 60 = Glenside station, 61 = Station 61, 62 = Station 62.</span></li>
-<li>What does a last digit of 0 mean? <span class="answer">No hydrants.</span></li>
-<li>What does a last digit of 3 mean? <span class="answer">Hydrants.</span></li>
-<li>What does a last digit of 5 mean? <span class="answer">Newer area close to the train; also used to help with mutual aid ambulances.</span></li>
-<li>What does a last digit of 6 mean? <span class="answer">Target hazard.</span></li>
-<li>What does a last digit of 7 mean? <span class="answer">Immediate care (Duly / Northwestern Medicine).</span></li>
-<li>What does a last digit of 8 mean? <span class="answer">Multifamily.</span></li>
-<li>Break down district 615. <span class="answer">Station 61's area, newer area near the train / mutual aid ambulance help.</span></li>
-<li>Break down district 626. <span class="answer">Station 62's area, target hazard.</span></li>
-<li>Break down district 603. <span class="answer">Glenside station's area, hydrants.</span></li>
-<li>Break down district 628. <span class="answer">Station 62's area, multifamily.</span></li>
-<li>Which district covers the north end along North Ave? <span class="answer">603.</span></li>
-<li>Which district is the large orange area just south of the railroad? <span class="answer">615.</span></li>
-<li>What is the address of Station 61? <span class="answer">524 Pennsylvania Ave, at N. Main St.</span></li>
-<li>What is the address of Station 62? <span class="answer">685 Taft Ave, south of Roosevelt Rd.</span></li>
-<li>Where is Glenbard West High School? <span class="answer">670 Crescent Blvd.</span></li>
-<li>Where is Hadley Junior High? <span class="answer">240 Hawthorne Blvd.</span></li>
-<li>Name the four D41 elementary schools and their addresses. <span class="answer">Churchill (240 Geneva Rd), Forest Glen (561 Elm St), Ben Franklin (350 Bryant Ave), Lincoln (380 Greenfield Ave).</span></li>
-<li>Where is Glen Crest Middle School? <span class="answer">725 Sheehan Ave.</span></li>
-<li>Where is Park View Elementary? <span class="answer">250 S Park Blvd.</span></li>
-<li>Which two Catholic schools are in town, and where? <span class="answer">St. Petronille (425 Prospect Ave) and St. James the Apostle (490 S Park Blvd).</span></li>
-<li>Where is Brookdale Glen Ellyn? <span class="answer">60 N Nicoll Ave.</span></li>
-<li>Where is Atria Park of Glen Ellyn? <span class="answer">95 Carleton Ave.</span></li>
-<li>Where is Churchill Place? <span class="answer">190 Geneva Rd.</span></li>
-<li>Where is Maple Glen Memory Care? <span class="answer">750 S Park Blvd.</span></li>
-<li>Which three churches are on Forest Ave? <span class="answer">First United Methodist (424), Grace Lutheran (493), First Congregational (535).</span></li>
-<li>Which two churches are on N. Main St? <span class="answer">St. Mark's Episcopal (393) and First Presbyterian (550).</span></li>
-<li>Which two churches are on S. Park Blvd? <span class="answer">St. James the Apostle (480) and Southminster Presbyterian (680).</span></li>
-<li>Where is St. Petronille Church? <span class="answer">420 Glenwood Ave.</span></li>
-<li>Where is Glen Ellyn Bible Church? <span class="answer">501 Hillside Ave.</span></li>
-</ol>
+
+<div id="modal" class="modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <h3 id="modal-title"></h3>
+    <p id="modal-text"></p>
+    <button type="button" id="modal-retry">Take the quiz again</button>
+    <button type="button" id="modal-close" class="secondary">Close</button>
+  </div>
+</div>
+
 
 <h2 id="sources">Sources</h2>
-<p class="note">Addresses come from the pages linked in each table. Last-digit meanings 0, 3, 5, 6 and 7 come from the Jan 30, 2024 "District Designations Question" thread. The meaning of 8 and of the first two digits was confirmed by you. District locations come from a photo of the March 9, 2026 map.</p>
+<p class="note">Addresses come from the pages linked in each table. Last-digit meanings 0, 3, 5, 6 and 7 come from the Jan 30, 2024 "District Designations Question" thread. The meaning of 8 and the station areas for the first two digits come from you. District locations come from a photo of the March 9, 2026 map.</p>
 </main>
 <script>
-  document.body.classList.add('hide-answers');
-  document.querySelectorAll('ol.quiz li').forEach(function (li) {
-    li.addEventListener('click', function () { li.classList.toggle('show'); });
+(function () {
+  var TOTAL = 25, PASS = Math.ceil(TOTAL * 0.7); // 18
+  var bank = [
+    ["What do the first two digits of a district number tell you?", "Which station's area it is", ["What is in the area", "How many hydrants are in the area", "The street address range"]],
+    ["Districts starting with 60 and 61 belong to which station?", "Station 61", ["Station 62", "Glenside", "Station 60"]],
+    ["Districts starting with 62 belong to which station?", "Station 62", ["Station 61", "Glenside", "Lombard"]],
+    ["What does a last digit of 0 mean?", "No hydrants", ["Hydrants", "Target hazard", "Multifamily"]],
+    ["What does a last digit of 3 mean?", "Hydrants", ["No hydrants", "Immediate care", "Target hazard"]],
+    ["What does a last digit of 5 mean?", "Newer area near the train; also helps with mutual aid ambulances", ["Target hazard", "Multifamily", "No hydrants"]],
+    ["What does a last digit of 6 mean?", "Target hazard", ["Hydrants", "Immediate care", "Newer area near the train"]],
+    ["What does a last digit of 7 mean?", "Immediate care (Duly / Northwestern Medicine)", ["Multifamily", "Target hazard", "No hydrants"]],
+    ["What does a last digit of 8 mean?", "Multifamily", ["Immediate care", "No hydrants", "Hydrants"]],
+    ["Break down district 615.", "Station 61's area, newer area near the train", ["Station 61's area, target hazard", "Station 62's area, hydrants", "Station 61's area, multifamily"]],
+    ["Break down district 626.", "Station 62's area, target hazard", ["Station 62's area, multifamily", "Station 61's area, target hazard", "Station 62's area, no hydrants"]],
+    ["Break down district 603.", "Station 61's area, hydrants", ["Station 62's area, hydrants", "Station 61's area, no hydrants", "Station 61's area, target hazard"]],
+    ["Break down district 628.", "Station 62's area, multifamily", ["Station 62's area, immediate care", "Station 61's area, multifamily", "Station 62's area, target hazard"]],
+    ["Break down district 610.", "Station 61's area, no hydrants", ["Station 61's area, hydrants", "Station 62's area, no hydrants", "Station 61's area, target hazard"]],
+    ["Which district covers the north end along North Ave?", "603", ["613", "623", "600"]],
+    ["Which district is the large orange area just south of the railroad?", "615", ["613", "625", "623"]],
+    ["What is the address of Station 61 (HQ)?", "524 Pennsylvania Ave", ["685 Taft Ave", "550 N Main St", "535 Duane St"]],
+    ["What is the address of Station 62?", "685 Taft Ave", ["524 Pennsylvania Ave", "725 Sheehan Ave", "250 S Park Blvd"]],
+    ["Where is Glenbard West High School?", "670 Crescent Blvd", ["23W200 Butterfield Rd", "240 Hawthorne Blvd", "596 Crescent Blvd"]],
+    ["Where is Hadley Junior High?", "240 Hawthorne Blvd", ["240 Geneva Rd", "725 Sheehan Ave", "561 Elm St"]],
+    ["Where is Churchill Elementary?", "240 Geneva Rd", ["240 Hawthorne Blvd", "190 Geneva Rd", "380 Greenfield Ave"]],
+    ["Where is Forest Glen Elementary?", "561 Elm St", ["350 Bryant Ave", "927 N Main St", "501 Hillside Ave"]],
+    ["Where is Benjamin Franklin Elementary?", "350 Bryant Ave", ["380 Greenfield Ave", "561 Elm St", "425 Prospect Ave"]],
+    ["Where is Abraham Lincoln Elementary?", "380 Greenfield Ave", ["350 Bryant Ave", "250 S Park Blvd", "796 Prairie Ave"]],
+    ["Where is Glen Crest Middle School?", "725 Sheehan Ave", ["685 Taft Ave", "750 S Park Blvd", "240 Hawthorne Blvd"]],
+    ["Where is Park View Elementary?", "250 S Park Blvd", ["41 N Park Blvd", "490 S Park Blvd", "750 S Park Blvd"]],
+    ["Where is St. Petronille School?", "425 Prospect Ave", ["420 Glenwood Ave", "490 S Park Blvd", "393 N Main St"]],
+    ["Where is St. James the Apostle School?", "490 S Park Blvd", ["480 S Park Blvd", "425 Prospect Ave", "680 S Park Blvd"]],
+    ["Where is Brookdale Glen Ellyn?", "60 N Nicoll Ave", ["95 Carleton Ave", "190 Geneva Rd", "750 S Park Blvd"]],
+    ["Where is Atria Park of Glen Ellyn?", "95 Carleton Ave", ["60 N Nicoll Ave", "750 S Park Blvd", "2S706 Park Blvd"]],
+    ["Where is Churchill Place Memory Care?", "190 Geneva Rd", ["240 Geneva Rd", "312 Geneva Rd", "95 Carleton Ave"]],
+    ["Where is Maple Glen Memory Care?", "750 S Park Blvd", ["680 S Park Blvd", "250 S Park Blvd", "60 N Nicoll Ave"]],
+    ["Which church is at 424 Forest Ave?", "First United Methodist", ["Grace Lutheran", "First Congregational", "First Presbyterian"]],
+    ["Which church is at 493 Forest Ave?", "Grace Lutheran", ["Faith Lutheran", "First United Methodist", "St. Mark's Episcopal"]],
+    ["Which church is at 535 Forest Ave?", "First Congregational", ["First Presbyterian", "Grace Lutheran", "Glen Ellyn Bible Church"]],
+    ["Where is St. Mark's Episcopal?", "393 N Main St", ["550 N Main St", "420 Glenwood Ave", "22W415 Butterfield Rd"]],
+    ["Where is First Presbyterian of Glen Ellyn?", "550 N Main St", ["680 S Park Blvd", "393 N Main St", "424 Forest Ave"]],
+    ["Where is St. Petronille Church?", "420 Glenwood Ave", ["425 Prospect Ave", "480 S Park Blvd", "219 Armitage Ave"]],
+    ["Where is St. James the Apostle Church?", "480 S Park Blvd", ["490 S Park Blvd", "420 Glenwood Ave", "680 S Park Blvd"]],
+    ["Where is Southminster Presbyterian?", "680 S Park Blvd", ["550 N Main St", "480 S Park Blvd", "750 S Park Blvd"]],
+    ["Where is Glen Ellyn Bible Church?", "501 Hillside Ave", ["277 Hawthorne Blvd", "796 Prairie Ave", "41 N Park Blvd"]],
+    ["Which church is at 200 S Lambert Rd?", "Village Green Baptist", ["Parkview Community Church", "Peoples Community Church", "Church of Christ"]],
+    ["Where is Faith Lutheran?", "41 N Park Blvd", ["493 Forest Ave", "23W080 Butterfield Rd", "250 S Park Blvd"]],
+    ["Where is Parkview Community Church?", "764 St. Charles Rd", ["312 Geneva Rd", "200 S Lambert Rd", "277 Hawthorne Blvd"]]
+  ];
+
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function $(id) { return document.getElementById(id); }
+
+  var qs, idx, correct, answered;
+
+  function start() {
+    qs = shuffle(bank).slice(0, TOTAL).map(function (q) { return { text: q[0], answer: q[1], options: shuffle([q[1]].concat(q[2])) }; });
+    idx = 0; correct = 0; answered = 0;
+    $('q-total').textContent = TOTAL;
+    $('modal').hidden = true;
+    render();
+  }
+
+  function render() {
+    var q = qs[idx];
+    $('q-num').textContent = idx + 1;
+    $('q-correct').textContent = correct;
+    $('q-answered').textContent = answered;
+    $('q-progress').style.width = (answered / TOTAL * 100) + '%';
+    $('q-text').textContent = q.text;
+    $('q-feedback').textContent = '';
+    $('q-feedback').className = 'feedback';
+    $('q-next').disabled = true;
+    $('q-next').textContent = idx === TOTAL - 1 ? 'See my score' : 'Next question';
+    var box = $('q-options'); box.innerHTML = '';
+    q.options.forEach(function (opt) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = opt;
+      b.addEventListener('click', function () { choose(b, opt); });
+      box.appendChild(b);
+    });
+  }
+
+  function choose(btn, opt) {
+    var q = qs[idx];
+    var buttons = $('q-options').querySelectorAll('button');
+    buttons.forEach(function (b) { b.disabled = true; if (b.textContent === q.answer) b.classList.add('correct'); });
+    answered++;
+    if (opt === q.answer) {
+      correct++;
+      $('q-feedback').textContent = 'Correct!';
+      $('q-feedback').className = 'feedback good';
+    } else {
+      btn.classList.add('wrong');
+      $('q-feedback').textContent = 'Not quite. The answer is: ' + q.answer;
+      $('q-feedback').className = 'feedback bad';
+    }
+    $('q-correct').textContent = correct;
+    $('q-answered').textContent = answered;
+    $('q-progress').style.width = (answered / TOTAL * 100) + '%';
+    $('q-next').disabled = false;
+    $('q-next').focus();
+  }
+
+  function finish() {
+    var pct = Math.round(correct / TOTAL * 100);
+    var box = document.querySelector('.modal-box');
+    if (correct >= PASS) {
+      box.className = 'modal-box pass';
+      $('modal-title').textContent = 'You are ready probie.';
+      $('modal-text').textContent = 'You scored ' + correct + ' of ' + TOTAL + ' (' + pct + '%).';
+    } else {
+      box.className = 'modal-box';
+      $('modal-title').textContent = 'Keep studying';
+      $('modal-text').textContent = 'You scored ' + correct + ' of ' + TOTAL + ' (' + pct + '%). You need ' + PASS + ' correct (70%) to pass.';
+    }
+    $('modal').hidden = false;
+    $('modal-retry').focus();
+  }
+
+  $('q-next').addEventListener('click', function () {
+    if (idx < TOTAL - 1) { idx++; render(); } else { finish(); }
   });
+  $('q-restart').addEventListener('click', start);
+  $('modal-retry').addEventListener('click', start);
+  $('modal-close').addEventListener('click', function () { $('modal').hidden = true; });
+
+  start();
+})();
 </script>
+
 </body>
 </html>
