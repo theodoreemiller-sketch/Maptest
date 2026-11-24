@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glen Ellyn Map Test Study Guide</title>
+<style>
+  :root { --ink:#1d232b; --muted:#5b6572; --line:#d9dee5; --accent:#b3261e; --bg:#fafbfc; --low:#fdecea; --med:#fff6e0; --high:#e7f5ea; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:var(--ink); background:#fff; }
+  main { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+  h1 { font-size: 30px; margin: 0 0 4px; }
+  .byline { color: var(--muted); margin: 0 0 20px; }
+  nav { background: var(--bg); border:1px solid var(--line); border-radius:8px; padding:12px 16px; margin-bottom:28px; }
+  nav a { color: var(--accent); text-decoration:none; margin-right:14px; white-space:nowrap; line-height:2; }
+  h2 { font-size: 22px; margin: 36px 0 8px; padding-bottom:6px; border-bottom: 3px solid var(--accent); }
+  table { width:100%; border-collapse: collapse; margin: 12px 0 10px; font-size: 15px; }
+  th, td { border:1px solid var(--line); padding:7px 9px; text-align:left; vertical-align:top; }
+  th { background: var(--bg); font-weight:600; }
+  tbody tr:nth-child(even) td { background:#fcfcfd; }
+  .table-wrap { overflow-x:auto; }
+  .conf { font-weight:600; border-radius:4px; padding:1px 6px; font-size:13px; }
+  .Low { background:var(--low); color:#8c1d18; }
+  .Med { background:var(--med); color:#7a5300; }
+  .High { background:var(--high); color:#1e6b34; }
+  .note { color: var(--muted); font-size: 14px; }
+  .callout { background:#fff8f7; border-left:4px solid var(--accent); padding:10px 14px; margin:14px 0; border-radius:0 6px 6px 0; }
+  .num { font-weight:700; font-variant-numeric: tabular-nums; }
+  a { color:#1a5fb4; }
+  ol.quiz { padding-left: 26px; }
+  ol.quiz li { margin: 8px 0; }
+  .answer { font-weight:700; margin-left:6px; }
+  .quiz-controls { margin: 10px 0; }
+  button { font:inherit; padding:6px 12px; border:1px solid var(--line); background:#fff; border-radius:6px; cursor:pointer; margin-right:8px; }
+  button:hover { background: var(--bg); }
+  body.hide-answers .answer { visibility: hidden; }
+  body.hide-answers li:hover .answer, body.hide-answers li.show .answer { visibility: visible; }
+  .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; border:1px solid #0002; vertical-align:-1px; margin-right:6px; }
+  @media print {
+    nav, .quiz-controls { display:none; }
+    body.hide-answers .answer { visibility: visible; }
+    h2 { break-after: avoid; }
+    tr { break-inside: avoid; }
+    a { color: inherit; text-decoration:none; }
+  }
+</style>
+</head>
+<body>
+<main>
+<h1>Glen Ellyn Map Test Study Guide</h1>
+<p class="byline">Updated November 24, 2026 · Based on the Village of Glen Ellyn Address and Fire District Map dated March 9, 2026</p>
+
+<nav>
+  <a href="#codes">District codes</a>
+  <a href="#districts">All districts</a>
+  <a href="#stations">Fire stations</a>
+  <a href="#schools">Schools</a>
+  <a href="#nursing">Nursing homes</a>
+  <a href="#churches">Churches</a>
+  <a href="#outside">Outside the map</a>
+  <a href="#quiz">Practice quiz</a>
+</nav>
+
+<h2 id="codes">How to read a district number</h2>
+<p>Every district number has three digits. <strong>The first two digits tell you whose station area it is. The last digit tells you what is in that area.</strong></p>
+
+<h3>First two digits: station area</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>First two digits</th><th>Station area</th></tr></thead>
+<tbody>
+<tr><td class="num">60x</td><td>Glenside station (Glenside Fire Protection District)</td></tr>
+<tr><td class="num">61x</td><td>Station 61 (Glen Ellyn HQ, downtown)</td></tr>
+<tr><td class="num">62x</td><td>Station 62 (Glen Ellyn, south of Roosevelt Rd)</td></tr>
+</tbody></table></div>
+
+<h3>Last digit: what is in the area</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Last digit</th><th>Meaning</th><th>Examples on the map</th></tr></thead>
+<tbody>
+<tr><td class="num">0</td><td>No hydrants</td><td>600, 610, 620</td></tr>
+<tr><td class="num">3</td><td>Hydrants</td><td>603, 613, 623</td></tr>
+<tr><td class="num">5</td><td>Newer area close to the train tracks; also used to help with mutual aid ambulances</td><td>605, 615, 625</td></tr>
+<tr><td class="num">6</td><td>Target hazard</td><td>606, 616, 626</td></tr>
+<tr><td class="num">7</td><td>Immediate care (Duly / Northwestern Medicine)</td><td>617, 627</td></tr>
+<tr><td class="num">8</td><td>Multifamily</td><td>618, 628</td></tr>
+</tbody></table></div>
+
+<div class="callout"><strong>Putting it together:</strong> <span class="num">615</span> = Station 61's area, newer area near the train. <span class="num">626</span> = Station 62's area, target hazard. <span class="num">603</span> = Glenside station's area, hydrants.</div>
+
+<p><strong>Still to confirm with your officer:</strong></p>
+<ul>
+<li>What "help with mutual aid ambulances" means for 5 districts. It was asked in the Jan 30, 2024 thread, but the screenshot shows no answer.</li>
+<li>Which Glenside station covers the 60x districts, and its address. (Glenside FPD headquarters is at 1608 Bloomingdale Rd, Glendale Heights.)</li>
+<li>Which buildings are in the 618 and 628 multifamily pockets.</li>
+</ul>
+
+<p><strong>Map legend (hydrant dots):</strong> greater than 1,500 GPM · 1,000–1,499 GPM · 500–999 GPM · less than 500 GPM · no data / not a Glen Ellyn water system hydrant. The black outline is the municipal (village) boundary.</p>
+
+<h2 id="districts">Every district on the map</h2>
+<p>The March 9, 2026 map shows 16 district numbers. Colors are as they look on the posted map. Locations come from reading a photo of the map, so the posted map is the final word.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>District</th><th>Color on map</th><th>Where it is</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td class="num">600</td><td><span class="swatch" style="background:#9cc8e8"></span>Light blue</td><td>Pockets in the north and northeast: one west near Bloomingdale Rd, one near North Ave by I-355, and the large block along St. Charles Rd west of I-355</td><td>Glenside area · no hydrants</td></tr>
+<tr><td class="num">603</td><td><span class="swatch" style="background:#e04a6e"></span>Red / pink</td><td>North end, from North Ave (Rt. 64) south to about Geneva Rd</td><td>Glenside area · hydrants</td></tr>
+<tr><td class="num">605</td><td><span class="swatch" style="background:#c9a0c0"></span>Mauve (small)</td><td>Small strip in the northwest of 603</td><td>Glenside area · newer area near train / mutual aid ambulance help</td></tr>
+<tr><td class="num">606</td><td><span class="swatch" style="background:#d8ecd5"></span>Pale green</td><td>One block in the northeast of 603, near Creekside</td><td>Glenside area · target hazard</td></tr>
+<tr><td class="num">610</td><td><span class="swatch" style="background:#9cc8e8"></span>Light blue</td><td>East side by I-355, south of the tracks</td><td>Station 61 area · no hydrants</td></tr>
+<tr><td class="num">613</td><td><span class="swatch" style="background:#f4f0cf"></span>Cream / pale yellow</td><td>North-central: from about Geneva Rd south to the railroad</td><td>Station 61 area · hydrants</td></tr>
+<tr><td class="num">615</td><td><span class="swatch" style="background:#e9a66e"></span>Orange</td><td>Central: south of the railroad</td><td>Station 61 area · newer area near train / mutual aid ambulance help</td></tr>
+<tr><td class="num">616</td><td><span class="swatch" style="background:#3d7a52"></span>Dark green</td><td>Downtown pockets along the railroad</td><td>Station 61 area · target hazard</td></tr>
+<tr><td class="num">617</td><td><span class="swatch" style="background:#8a5bb0"></span>Purple (small)</td><td>Downtown, by Pennsylvania Ave</td><td>Station 61 area · immediate care (likely the Duly clinic downtown; confirm)</td></tr>
+<tr><td class="num">618</td><td><span class="swatch" style="background:#5fb7b5"></span>Teal (small)</td><td>Three small pockets inside 615</td><td>Station 61 area · multifamily</td></tr>
+<tr><td class="num">620</td><td><span class="swatch" style="background:#8fd0d6"></span>Teal / light blue</td><td>Two small pockets in the south (one inside 625, one at the far south)</td><td>Station 62 area · no hydrants</td></tr>
+<tr><td class="num">623</td><td><span class="swatch" style="background:#efd3a8"></span>Tan / beige</td><td>South-central and southwest, on both sides of Roosevelt Rd (Rt. 38)</td><td>Station 62 area · hydrants</td></tr>
+<tr><td class="num">625</td><td><span class="swatch" style="background:#b4aed0"></span>Lavender / gray-purple</td><td>Southeast, east of 623, along Rt. 53 and Roosevelt Rd toward I-355</td><td>Station 62 area · newer area near train / mutual aid ambulance help</td></tr>
+<tr><td class="num">626</td><td><span class="swatch" style="background:#e77fa4"></span>Pink</td><td>Several pockets inside 623, mostly along Park Blvd and near Roosevelt Rd, plus a larger one in the southwest</td><td>Station 62 area · target hazard</td></tr>
+<tr><td class="num">627</td><td><span class="swatch" style="background:#bfe3c8"></span>Light green (small)</td><td>East side near Roosevelt Rd and Rt. 53</td><td>Station 62 area · immediate care</td></tr>
+<tr><td class="num">628</td><td><span class="swatch" style="background:#ddd"></span>Small pocket</td><td>Just south of Roosevelt Rd near Rt. 53</td><td>Station 62 area · multifamily</td></tr>
+</tbody></table></div>
+
+<h2 id="stations">Fire stations</h2>
+<p>The Glen Ellyn Volunteer Fire Company runs two stations. In this and later tables, <strong>District</strong> is my best read of the map photo and <strong>Confidence</strong> says how sure that read is. Check every <span class="conf Low">Low</span> against the posted map.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Station</th><th>Address</th><th>District</th><th>Confidence</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Station 61 (Headquarters)</td><td><a href="https://wiki.radioreference.com/index.php/Dupage_County_(IL)_Fire/EMS">524 Pennsylvania Ave (at N. Main St)</a></td><td class="num">616</td><td><span class="conf Med">Med</span></td><td>Downtown. Some listings show 506 Pennsylvania Ave.</td></tr>
+<tr><td>Station 62</td><td><a href="https://wiki.radioreference.com/index.php/Dupage_County_(IL)_Fire/EMS">685 Taft Ave</a> (between Exmoor Ave and Kingsbrook Glen)</td><td class="num">623</td><td><span class="conf Low">Low</span></td><td>South of Roosevelt Rd (<a href="https://www.dailyherald.com/20251110/news/glen-ellyn-wants-input-on-potential-fire-station-renovations/">Daily Herald</a>). Some listings show 681 Taft Ave.</td></tr>
+<tr><td>Glenside FPD (covers 60x districts)</td><td>HQ: 1608 Bloomingdale Rd, Glendale Heights</td><td>—</td><td><span class="conf Low">Low</span></td><td>Confirm which Glenside station is first-due for 60x.</td></tr>
+</tbody></table></div>
+<p class="note">Public listings disagree on the house numbers for both Glen Ellyn stations, so confirm them with your officer.</p>
+
+<h2 id="schools">Schools</h2>
+<p>13 schools sit inside or on the edge of the colored districts: 9 public and 4 private. Schools outside the colored area, such as Glenbard South, are in the "Outside the map" section.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>School</th><th>Type / grades</th><th>Address</th><th>District</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><a href="https://www.glenbard87.org/?p=705">Glenbard West High School</a></td><td>Public HS 9–12 (D87)</td><td>670 Crescent Blvd</td><td>616</td><td><span class="conf Med">Med</span></td></tr>
+<tr><td><a href="https://l2rdev.librarylearning.org/glen-ellyn-school-district-41">Hadley Junior High</a></td><td>Public 6–8 (D41)</td><td>240 Hawthorne Blvd</td><td>613</td><td><span class="conf Med">Med</span></td></tr>
+<tr><td><a href="https://l2rdev.librarylearning.org/glen-ellyn-school-district-41">Churchill Elementary</a></td><td>Public PK–5 (D41)</td><td>240 Geneva Rd</td><td>603 or 613 (on Geneva Rd line)</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://l2rdev.librarylearning.org/glen-ellyn-school-district-41">Forest Glen Elementary</a></td><td>Public PK–5 (D41)</td><td>561 Elm St</td><td>613</td><td><span class="conf Med">Med</span></td></tr>
+<tr><td><a href="https://l2rdev.librarylearning.org/glen-ellyn-school-district-41">Benjamin Franklin Elementary</a></td><td>Public K–5 (D41)</td><td>350 Bryant Ave</td><td>615</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://l2rdev.librarylearning.org/glen-ellyn-school-district-41">Abraham Lincoln Elementary</a></td><td>Public K–5 (D41)</td><td>380 Greenfield Ave</td><td>615</td><td><span class="conf Med">Med</span></td></tr>
+<tr><td><a href="https://www.ccsd89.org/Domain/14">Park View Elementary</a></td><td>Public K–5 (D89)</td><td>250 S Park Blvd</td><td>623 or 626</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://www.ccsd89.org/Domain/14">Glen Crest Middle School</a></td><td>Public 6–8 (D89)</td><td>725 Sheehan Ave</td><td>623 or 626</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://www.ccsd89.org/Domain/14">Arbor View Elementary</a></td><td>Public PK–5 (D89)</td><td>22W430 Ironwood Dr</td><td>Possibly outside colored area (unincorporated address)</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://catechesis.diojoliet.org/en/web/catholic-schools/find-a-school">St. Petronille School</a></td><td>Catholic PK–8</td><td>425 Prospect Ave</td><td>615</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://catechesis.diojoliet.org/en/web/catholic-schools/find-a-school">St. James the Apostle School</a></td><td>Catholic PK–8</td><td>490 S Park Blvd</td><td>623 or 626</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://www.privateschoolreview.com/illinois/zip/60137">Montessori Academy of Glen Ellyn</a></td><td>Private PK–8</td><td>927 N Main St</td><td>613 or 603</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://www.privateschoolreview.com/carriers-of-light-profile">Carriers of Light</a></td><td>Islamic PK–8</td><td>900 E Geneva Rd (some listings say 1607 Taft Ave, Wheaton)</td><td>Unknown; may be outside Glen Ellyn</td><td><span class="conf Low">Low</span></td></tr>
+</tbody></table></div>
+<p class="note">District offices (not schools, but you may be asked): D41 at 793 N Main St · D87 at 596 Crescent Blvd · D89 at 22W600 Butterfield Rd.</p>
+
+<h2 id="nursing">Nursing homes and senior living</h2>
+<p>Four senior care buildings sit in the colored districts: Brookdale, Atria, Churchill Place and Maple Glen.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Facility</th><th>Care type</th><th>Address</th><th>District</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><a href="https://health.usnews.com/best-senior-living/assisted-living/illinois/glen-ellyn">Brookdale Glen Ellyn</a> (formerly The Meadows of Glen Ellyn)</td><td>Independent + assisted living (some listings add skilled nursing)</td><td>60 N Nicoll Ave</td><td>Unknown; check map</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://atriaseniorliving.com/retirement-communities/atria-park-of-glen-ellyn-glen-ellyn-il">Atria Park of Glen Ellyn</a> (formerly Sunrise of Glen Ellyn)</td><td>Assisted living + memory care</td><td>95 Carleton Ave</td><td>625, or the 628 pocket</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://www.anthemmemorycare.com/senior-living/il/glen-ellyn/churchill-place">Churchill Place Memory Care</a> (formerly Charter Senior Living / Autumn Leaves)</td><td>Memory care</td><td>190 Geneva Rd</td><td>603 or 613 (on Geneva Rd line)</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://assistedlivingmagazine.com/assisted-living/maple-glen-memory-care-community/">Maple Glen Memory Care</a></td><td>Assisted living + memory care</td><td>750 S Park Blvd</td><td>623 or 625</td><td><span class="conf Low">Low</span></td></tr>
+</tbody></table></div>
+<p class="note">Older names still show up in dispatch notes and listings, so learn both names for Brookdale, Atria and Churchill Place.</p>
+
+<h2 id="churches">Churches</h2>
+<p>19 churches sit inside or on the edge of the colored districts. Many cluster on Forest Ave and N. Main St near downtown, and on S. Park Blvd to the south.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Church</th><th>Denomination</th><th>Address</th><th>District</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><a href="https://business.glenellynchamber.com/list/category/church-1263">First United Methodist</a></td><td>Methodist</td><td>424 Forest Ave</td><td>613</td><td><span class="conf Med">Med</span></td></tr>
+<tr><td><a href="https://business.glenellynchamber.com/list/category/church-1263">Grace Lutheran</a></td><td>Lutheran (ELCA)</td><td>493 Forest Ave</td><td>613</td><td><span class="conf Med">Med</span></td></tr>
+<tr><td><a href="https://business.glenellynchamber.com/list/category/church-1263">First Congregational</a></td><td>UCC</td><td>535 Forest Ave (at Anthony St)</td><td>613</td><td><span class="conf Med">Med</span></td></tr>
+<tr><td><a href="https://business.glenellynchamber.com/list/category/church-1263">St. Mark's Episcopal</a></td><td>Episcopal</td><td>393 N Main St</td><td>613 or 616</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://business.glenellynchamber.com/list/category/church-1263">First Presbyterian</a></td><td>Presbyterian (USA)</td><td>550 N Main St</td><td>613 or 616</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://business.glenellynchamber.com/list/category/church-1263">Faith Lutheran</a></td><td>Lutheran (ELCA)</td><td>41 N Park Blvd</td><td>613 or 615</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://www.christianity.com/church-directory/illinois/glen-ellyn/evangelical">Glen Ellyn Evangelical Covenant</a></td><td>Evangelical Covenant</td><td>277 Hawthorne Blvd</td><td>613</td><td><span class="conf Med">Med</span></td></tr>
+<tr><td><a href="https://pcc.churchcenter.com/home">Parkview Community Church</a></td><td>Baptist / community</td><td>764 St. Charles Rd</td><td>613 or 600</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://www.7cups.com/local/us/il/glen-ellyn/faith/">Cornerstone Christian Church</a> (also listed as Glen Ellyn Filipino SDA)</td><td>Christian</td><td>312 Geneva Rd</td><td>603 or 613 (on Geneva Rd line)</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://gcatholic.org/churches/usa-07/30693">Queenship of Mary</a></td><td>Catholic (Vietnamese)</td><td>219 Armitage Ave</td><td>Unknown; check map</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://gcatholic.org/churches/usa-07/30695">St. Petronille Church</a></td><td>Catholic</td><td>420 Glenwood Ave</td><td>615</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://usachurches.org/church/glen-ellyn-bible-church.htm">Glen Ellyn Bible Church</a></td><td>Bible / nondenominational</td><td>501 Hillside Ave</td><td>615</td><td><span class="conf Med">Med</span></td></tr>
+<tr><td><a href="https://www.yellowpages.com/glen-ellyn-il/church-of-christ">Church of Christ of Glen Ellyn</a></td><td>Church of Christ</td><td>796 Prairie Ave</td><td>615</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://www.yellowpages.com/glen-ellyn-il/church-of-christ">First Church of Christ, Scientist</a></td><td>Christian Science</td><td>600 N Main St</td><td>613 or 616</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://gcatholic.org/churches/usa-07/30694">St. James the Apostle Church</a></td><td>Catholic</td><td>480 S Park Blvd</td><td>623 or 626</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://business.glenellynchamber.com/list/category/church-1263">Southminster Presbyterian</a></td><td>Presbyterian (USA)</td><td>680 S Park Blvd</td><td>623 or 626</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td><a href="https://nabconference.org/directory/village-green-baptist-church/">Village Green Baptist</a></td><td>Baptist</td><td>200 S Lambert Rd</td><td>625</td><td><span class="conf Med">Med</span></td></tr>
+<tr><td><a href="https://churcheslist.com/glenfield-baptist-church">Peoples Community / Glenfield Baptist</a></td><td>Baptist / community</td><td>670 S Lambert Rd</td><td>625</td><td><span class="conf Low">Low</span></td></tr>
+<tr><td>Christian Science Society</td><td>Christian Science</td><td>Meets at Grace Lutheran (493 Forest Ave) and Brookdale (60 N Nicoll Ave)</td><td>Same as host building</td><td><span class="conf Med">Med</span></td></tr>
+</tbody></table></div>
+<p class="note">Two listings may be out of date: the 600 N Main St Christian Science church comes from an old directory, and 670 S Lambert Rd appears under two names. Confirm both.</p>
+
+<h2 id="outside">Outside the colored districts</h2>
+<p>These places have Glen Ellyn mailing addresses but unincorporated grid addresses (like 2S125 or 23W200), so they are probably outside the colored area. Ask whether your test includes them.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Place</th><th>Type</th><th>Address</th></tr></thead>
+<tbody>
+<tr><td><a href="https://www.glenbard87.org/?p=705">Glenbard South High School</a></td><td>Public HS 9–12</td><td>23W200 Butterfield Rd</td></tr>
+<tr><td><a href="https://www.ccsd89.org/Domain/14">Westfield Elementary</a></td><td>Public K–5</td><td>2S125 Mayfield Ln</td></tr>
+<tr><td><a href="https://www.senioradvice.com/nursing-homes/glen-ellyn-il">Arden Courts of Glen Ellyn</a></td><td>Memory care / skilled nursing</td><td>2S706 Park Blvd</td></tr>
+<tr><td><a href="https://issuu.com/shawmedia/docs/slm_glenellyn_chamber_2022/s/17775674">St. Barnabas Episcopal</a></td><td>Church</td><td>22W415 Butterfield Rd</td></tr>
+<tr><td><a href="https://www.christianity.com/church-directory/illinois/glen-ellyn/lutheran">St. Luke Lutheran</a></td><td>Church</td><td>23W080 Butterfield Rd</td></tr>
+<tr><td><a href="https://churcheslist.com/saint-thomas-united-methodist-church-4">St. Thomas United Methodist</a></td><td>Church</td><td>2S511 IL Route 53</td></tr>
+<tr><td><a href="https://www.christianity.com/church-directory/glen-ellyn-seventh-day-adventist-church-149047">Glen Ellyn Seventh-day Adventist</a></td><td>Church</td><td>1N450 Main St</td></tr>
+<tr><td><a href="https://www.superpages.com/elmhurst-il/interdenominational-churches">Family Life Christian Center</a></td><td>Church</td><td>1N581 Main St</td></tr>
+</tbody></table></div>
+<p class="note">Not included on purpose: preschools and daycares, College of DuPage, and neighboring departments' stations.</p>
+
+<h2 id="quiz">Practice quiz</h2>
+<p>Answers are hidden. Tap or hover a question to reveal its answer, or use the buttons. Printing shows all answers.</p>
+<div class="quiz-controls">
+  <button type="button" onclick="document.body.classList.remove('hide-answers')">Show all answers</button>
+  <button type="button" onclick="document.body.classList.add('hide-answers');document.querySelectorAll('ol.quiz li.show').forEach(function(li){li.classList.remove('show')})">Hide all answers</button>
+</div>
+<ol class="quiz">
+<li>What do the first two digits of a district tell you? <span class="answer">The station area: 60 = Glenside station, 61 = Station 61, 62 = Station 62.</span></li>
+<li>What does a last digit of 0 mean? <span class="answer">No hydrants.</span></li>
+<li>What does a last digit of 3 mean? <span class="answer">Hydrants.</span></li>
+<li>What does a last digit of 5 mean? <span class="answer">Newer area close to the train; also used to help with mutual aid ambulances.</span></li>
+<li>What does a last digit of 6 mean? <span class="answer">Target hazard.</span></li>
+<li>What does a last digit of 7 mean? <span class="answer">Immediate care (Duly / Northwestern Medicine).</span></li>
+<li>What does a last digit of 8 mean? <span class="answer">Multifamily.</span></li>
+<li>Break down district 615. <span class="answer">Station 61's area, newer area near the train / mutual aid ambulance help.</span></li>
+<li>Break down district 626. <span class="answer">Station 62's area, target hazard.</span></li>
+<li>Break down district 603. <span class="answer">Glenside station's area, hydrants.</span></li>
+<li>Break down district 628. <span class="answer">Station 62's area, multifamily.</span></li>
+<li>Which district covers the north end along North Ave? <span class="answer">603.</span></li>
+<li>Which district is the large orange area just south of the railroad? <span class="answer">615.</span></li>
+<li>What is the address of Station 61? <span class="answer">524 Pennsylvania Ave, at N. Main St.</span></li>
+<li>What is the address of Station 62? <span class="answer">685 Taft Ave, south of Roosevelt Rd.</span></li>
+<li>Where is Glenbard West High School? <span class="answer">670 Crescent Blvd.</span></li>
+<li>Where is Hadley Junior High? <span class="answer">240 Hawthorne Blvd.</span></li>
+<li>Name the four D41 elementary schools and their addresses. <span class="answer">Churchill (240 Geneva Rd), Forest Glen (561 Elm St), Ben Franklin (350 Bryant Ave), Lincoln (380 Greenfield Ave).</span></li>
+<li>Where is Glen Crest Middle School? <span class="answer">725 Sheehan Ave.</span></li>
+<li>Where is Park View Elementary? <span class="answer">250 S Park Blvd.</span></li>
+<li>Which two Catholic schools are in town, and where? <span class="answer">St. Petronille (425 Prospect Ave) and St. James the Apostle (490 S Park Blvd).</span></li>
+<li>Where is Brookdale Glen Ellyn? <span class="answer">60 N Nicoll Ave.</span></li>
+<li>Where is Atria Park of Glen Ellyn? <span class="answer">95 Carleton Ave.</span></li>
+<li>Where is Churchill Place? <span class="answer">190 Geneva Rd.</span></li>
+<li>Where is Maple Glen Memory Care? <span class="answer">750 S Park Blvd.</span></li>
+<li>Which three churches are on Forest Ave? <span class="answer">First United Methodist (424), Grace Lutheran (493), First Congregational (535).</span></li>
+<li>Which two churches are on N. Main St? <span class="answer">St. Mark's Episcopal (393) and First Presbyterian (550).</span></li>
+<li>Which two churches are on S. Park Blvd? <span class="answer">St. James the Apostle (480) and Southminster Presbyterian (680).</span></li>
+<li>Where is St. Petronille Church? <span class="answer">420 Glenwood Ave.</span></li>
+<li>Where is Glen Ellyn Bible Church? <span class="answer">501 Hillside Ave.</span></li>
+</ol>
+
+<h2 id="sources">Sources</h2>
+<p class="note">Addresses come from the pages linked in each table. Last-digit meanings 0, 3, 5, 6 and 7 come from the Jan 30, 2024 "District Designations Question" thread. The meaning of 8 and of the first two digits was confirmed by you. District locations come from a photo of the March 9, 2026 map.</p>
+</main>
+<script>
+  document.body.classList.add('hide-answers');
+  document.querySelectorAll('ol.quiz li').forEach(function (li) {
+    li.addEventListener('click', function () { li.classList.toggle('show'); });
+  });
+</script>
+</body>
+</html>
